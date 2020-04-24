@@ -5,6 +5,7 @@
 #include "Hazel/Renderer/Shader.h"
 #include "Hazel/Renderer/RenderCommand.h"
 
+#include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Hazel {
@@ -220,6 +221,8 @@ namespace Hazel {
 			textureIndex = (float)s_Data.TextureSlotIndex;
 			s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
 			s_Data.TextureSlotIndex++;
+
+			s_Data.Stats.TextureCount++;
 		}
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -310,6 +313,8 @@ namespace Hazel {
 			textureIndex = (float)s_Data.TextureSlotIndex;
 			s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
 			s_Data.TextureSlotIndex++;
+
+			s_Data.Stats.TextureCount++;
 		}
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -333,7 +338,21 @@ namespace Hazel {
 
 	void Renderer2D::ResetStats()
 	{
-		memset(&s_Data.Stats, 0, sizeof(Statistics));
+		s_Data.Stats.DrawCalls = 0;
+		s_Data.Stats.QuadCount = 0;
+		s_Data.Stats.TextureCount = 0;
+	}
+
+	void Renderer2D::StatsBeginFrame() {
+		s_Data.Stats.CurrentFrameBeginTime = (float)glfwGetTime();
+	}
+
+	void Renderer2D::StatsEndFrame() {
+		s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] = (float)glfwGetTime() - s_Data.Stats.CurrentFrameBeginTime;
+		s_Data.Stats.TotalFrameRenderTime += (s_Data.Stats.FrameRenderTime[s_Data.Stats.FrameCount] - s_Data.Stats.FrameRenderTime[(s_Data.Stats.FrameCount + 1) % s_Data.Stats.FrameRenderTime.size()]);
+		if (++s_Data.Stats.FrameCount == s_Data.Stats.FrameRenderTime.size()) {
+			s_Data.Stats.FrameCount = 0;
+		}
 	}
 
 	Renderer2D::Statistics Renderer2D::GetStats()

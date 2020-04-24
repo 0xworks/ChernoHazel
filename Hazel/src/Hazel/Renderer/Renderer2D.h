@@ -30,14 +30,23 @@ namespace Hazel {
 		// Stats
 		struct Statistics
 		{
+			std::array<float, 100> FrameRenderTime; // collect render time for multiple frames
 			uint32_t DrawCalls = 0;
 			uint32_t QuadCount = 0;
+			uint32_t TextureCount = 0;
+			uint32_t FrameCount = 0;
+			float CurrentFrameBeginTime = 0.0f;
+			float TotalFrameRenderTime = 0.0f;
 
 			uint32_t GetTotalVertexCount() { return QuadCount * 4; }
 			uint32_t GetTotalIndexCount() { return QuadCount * 6; }
 		};
+
 		static void ResetStats();
+		static void StatsBeginFrame();
+		static void StatsEndFrame();
 		static Statistics GetStats();
+
 	private:
 		static void FlushAndReset();
 	};
