@@ -1,3 +1,5 @@
+
+Looking for the BoulderDash clone?  It's now [here](https://github.com/freeman40/HazelDash), with some re-done graphics.
 # Hazel
 
 ![Hazel](/Resources/Branding/Hazel_Logo_Text_Light_Square.png?raw=true "Hazel")
