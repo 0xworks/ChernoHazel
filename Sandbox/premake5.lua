@@ -18,7 +18,7 @@ project "Sandbox"
 	    "../Hazel/src",
 	    "../Hazel/vendor/glm",
 	    "../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
-	    "../Hazel/vendor/spdlog/include",
+	    "../Hazel/vendor/spdlog/include"
 	}
 
 	links

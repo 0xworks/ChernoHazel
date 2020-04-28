@@ -4,14 +4,6 @@ project "Hazel"
 	cppdialect "C++17"
 	staticruntime "on"
 
-	IncludeDir = {}
-	IncludeDir["Glad"] = "vendor/Glad/include"
-	IncludeDir["GLFW"] = "vendor/GLFW/include"
-	IncludeDir["glm"] = "vendor/glm"
-	IncludeDir["ImGui"] = "vendor/imgui"
-	IncludeDir["spdlog"] = "vendor/spdlog/include"
-	IncludeDir["stb_image"] = "vendor/stb_image"
-
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -36,12 +28,12 @@ project "Hazel"
 	includedirs
 	{
 		"src",
-		"%{IncludeDir.Glad}",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.stb_image}"
+		"vendor/Glad/include",
+		"vendor/GLFW/include",
+		"vendor/glm",
+		"vendor/imgui",
+		"vendor/spdlog/include",
+		"vendor/stb_image"
 	}
 
 	links 
