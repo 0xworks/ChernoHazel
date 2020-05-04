@@ -28,8 +28,7 @@ namespace Hazel {
 			}
 
 			void EntityDestroyed(const Entity entity) {
-				for (auto const& pair : m_Systems) {
-					auto const& system = pair.second;
+				for (auto const& [name, system] : m_Systems) {
 					system->m_Entities.erase(entity);
 				}
 			}
