@@ -63,6 +63,11 @@ namespace Hazel {
 		}
 
 		template<typename T>
+		bool HasComponent(const Entity entity) {
+			return componentManager->HasComponent<T>(entity);
+		}
+
+		template<typename T>
 		ComponentType GetComponentType() {
 			return componentManager->GetComponentType<T>();
 		}

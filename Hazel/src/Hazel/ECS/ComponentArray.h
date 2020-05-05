@@ -57,6 +57,11 @@ namespace Hazel {
 			}
 
 
+			bool Has(const Entity entity) {
+				return(m_EntityToIndexMap.find(entity) != m_EntityToIndexMap.end());
+			}
+
+
 			void EntityDestroyed(const Entity entity) override {
 				if (m_EntityToIndexMap.find(entity) != m_EntityToIndexMap.end()) {
 					Remove(entity);

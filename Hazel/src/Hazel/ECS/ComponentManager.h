@@ -42,6 +42,11 @@ namespace Hazel {
 				return GetComponentArray<T>()->Get(entity);
 			}
 
+			template<typename T>
+			bool HasComponent(const Entity entity) {
+				return GetComponentArray<T>()->Has(entity);
+			}
+
 			void EntityDestroyed(const Entity entity) {
 				for (auto const& [name, component] : m_ComponentArrays) {
 					component->EntityDestroyed(entity);
