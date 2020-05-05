@@ -52,7 +52,7 @@ namespace Hazel {
 		void RemoveComponent(const Entity entity) {
 			componentManager->RemoveComponent<T>(entity);
 			auto signature = entityManager->GetSignature(entity);
-			signature.set(m_componentManager->GetComponentType<T>(), false);
+			signature.set(componentManager->GetComponentType<T>(), false);
 			entityManager->SetSignature(entity, signature);
 			systemManager->EntitySignatureChanged(entity, signature);
 		}
