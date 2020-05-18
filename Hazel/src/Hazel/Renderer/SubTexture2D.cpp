@@ -16,12 +16,8 @@ namespace Hazel {
 			(1.0f / texture->GetWidth()) * 0.5f,
 			(1.0f / texture->GetHeight()) * 0.5f
 		};
-
-		glm::vec2 minSpriteSize = {spriteSize.x < 0 ? -spriteSize.x : 0, spriteSize.y < 0? -spriteSize.y : 0};
-		glm::vec2 maxSpriteSize = {spriteSize.x > 0 ?  spriteSize.x : 0, spriteSize.y > 0?  spriteSize.y : 0};
-
-		glm::vec2 min = {(coords.x + minSpriteSize.x) * cellSize.x / texture->GetWidth(), (coords.y + minSpriteSize.y) * cellSize.y / texture->GetHeight()};
-		glm::vec2 max = {(coords.x + maxSpriteSize.x) * cellSize.x / texture->GetWidth(), (coords.y + maxSpriteSize.y) * cellSize.y / texture->GetHeight()};
+		glm::vec2 min = {coords.x * cellSize.x / texture->GetWidth(), coords.y * cellSize.y / texture->GetHeight()};
+		glm::vec2 max = {(coords.x + spriteSize.x) * cellSize.x / texture->GetWidth(), (coords.y + spriteSize.y) * cellSize.y / texture->GetHeight()};
 		return CreateRef<SubTexture2D>(texture, min + texelHalfSize, max - texelHalfSize);
 	}
 }
