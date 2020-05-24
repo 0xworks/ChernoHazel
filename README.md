@@ -1,5 +1,19 @@
 
-Looking for the BoulderDash clone?  It's now [here](https://github.com/freeman40/HazelDash), with some re-done graphics.
+## Dev branch ##
+This is the "dev" branch of my Hazel fork.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
+
+This branch should not be used to create PRs for upstream TheCherno/Hazel.
+
+The "master" branch is intended to be kept in synch with upstream TheCherno/Hazel (and when convienient or necessary those changes can be merged into this dev branch.
+
+For PRs to upstream TheCherno/Hazel, follow this workflow:
+1) Get "master" in synch with upstream/master  (this will just be a fast-forward, since I do not do any other changes to master)
+2) Branch from master
+3) Checkout the branch and do the changes that you want to submit in the PR
+4) Create PR from branch --> TheCherno/master
+5) (later, if/when the PR is accepted) do step 1 again (which should fast-forward to TheCherno/master which now contains your PR, and then delete the PR branch (its no longer needed)
+
+
 # Hazel
 
 ![Hazel](/Resources/Branding/Hazel_Logo_Text_Light_Square.png?raw=true "Hazel")
