@@ -1,6 +1,6 @@
 
-## Dev branch ##
-This is the "dev" branch of my Hazel fork.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
+## Freeman40  branch ##
+This is the "Freeman40" branch of my fork of TheCherno/Hazel.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
 
 This branch should not be used to create PRs for upstream TheCherno/Hazel.
 
