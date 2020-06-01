@@ -1,6 +1,16 @@
 ## Freeman40  branch ##
 This is the "Freeman40" branch of my fork of TheCherno/Hazel.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
 
+Notable features in the Freeman40 branch:
+- Spritesheets
+  - stuff from recent yt clips in the game engine series (not yet committed to TheCherno/Hazel)
+  - bug fix for texture bleeding at edges
+  - sub textures can be flipped in one or both axes by setting size to negative values
+- Experimental ECS
+- "modular" premake (to make it easier to use Hazel as a submodule of external project)
+- Profiling is done with the "Tracy Profiler"
+	
+
 This branch should not be used to create PRs for upstream TheCherno/Hazel.
 
 The "master" branch is intended to be kept in synch with upstream TheCherno/Hazel (and when convienient or necessary those changes can be merged into this Freeman40 branch.
