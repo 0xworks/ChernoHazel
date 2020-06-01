@@ -5,8 +5,8 @@ workspace "Hazel"
 	configurations
 	{
 		"Debug",
-		"Release",
-		"Dist"
+		"Profile",
+		"Release"
 	}
 	
 	flags

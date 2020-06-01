@@ -17,7 +17,7 @@ project "Hazel"
 		"vendor/stb_image/**.h",
 		"vendor/stb_image/**.cpp",
 		"vendor/glm/glm/**.hpp",
-		"vendor/glm/glm/**.inl",
+		"vendor/glm/glm/**.inl"
 	}
 
 	defines
@@ -59,12 +59,21 @@ project "Hazel"
 		runtime "Debug"
 		symbols "on"
 
+	filter "configurations:Profile"
+		files "../vendor/Tracy/TracyClient.cpp"
+		defines
+		{
+			"HZ_PROFILE",
+			"TRACY_ENABLE"
+		}
+		runtime "Release"
+		optimize "on"
+
 	filter "configurations:Release"
 		defines "HZ_RELEASE"
 		runtime "Release"
 		optimize "on"
 
-	filter "configurations:Dist"
-		defines "HZ_DIST"
-		runtime "Release"
-		optimize "on"
+	filter "files:**/TracyClient.cpp"
+		flags "NoPCH"
+	

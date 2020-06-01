@@ -39,12 +39,16 @@ project "Sandbox"
 		runtime "Debug"
 		symbols "on"
 
-	filter "configurations:Release"
-		defines "HZ_RELEASE"
+	filter "configurations:Profile"
+		defines
+		{
+			"HZ_PROFILE",
+			"TRACY_ENABLE"
+		}
 		runtime "Release"
 		optimize "on"
 
-	filter "configurations:Dist"
-		defines "HZ_DIST"
+	filter "configurations:Release"
+		defines "HZ_RELEASE"
 		runtime "Release"
 		optimize "on"
