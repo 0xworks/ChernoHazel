@@ -9,16 +9,13 @@ namespace Hazel {
 
 	struct WindowProps
 	{
-		std::string Title;
-		unsigned int Width;
-		unsigned int Height;
-
-		WindowProps(const std::string& title = "Hazel Engine",
-			        unsigned int width = 1280,
-			        unsigned int height = 720)
-			: Title(title), Width(width), Height(height)
-		{
-		}
+		std::string Title = "Hazel Engine";
+		unsigned int InitialWidth = 1280;
+		unsigned int InitialHeight = 720;
+		unsigned int MinWidth = 0;
+		unsigned int MinHeight = 0;
+		unsigned int MaxWidth = 0;
+		unsigned int MaxHeight = 0;
 	};
 
 	// Interface representing a desktop system based Window
@@ -41,7 +38,7 @@ namespace Hazel {
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static Scope<Window> Create(const WindowProps& props = WindowProps());
+		static Scope<Window> Create(const WindowProps& props = {});
 	};
 
 }
