@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace Hazel
 {
 	typedef enum class KeyCode : uint16_t
@@ -139,7 +141,7 @@ namespace Hazel
 
 	inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
 	{
-		os << static_cast<int32_t>(keyCode);
+		os << static_cast<int>(keyCode);
 		return os;
 	}
 }
