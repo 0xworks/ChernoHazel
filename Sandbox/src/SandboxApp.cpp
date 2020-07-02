@@ -13,9 +13,7 @@ public:
 		PushLayer(new Sandbox2D());
 	}
 
-	~Sandbox()
-	{
-	}
+	~Sandbox() = default;
 };
 
 Hazel::Application* Hazel::CreateApplication()

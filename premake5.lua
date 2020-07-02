@@ -1,6 +1,6 @@
 workspace "Hazel"
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "Hazelnut"
 
 	configurations
 	{
@@ -20,7 +20,7 @@ group "Dependencies"
 	include "Hazel/vendor/GLFW"
 	include "Hazel/vendor/Glad"
 	include "Hazel/vendor/imgui"
-
 group ""
 	include "Hazel"
+	include "Hazelnut"
 	include "Sandbox"

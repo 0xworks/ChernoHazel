@@ -1,5 +1,5 @@
-project "Hazel"
-	kind "StaticLib"
+project "Hazelnut"
+	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
@@ -7,60 +7,39 @@ project "Hazel"
 	targetdir ("../bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "hzpch.h"
-	pchsource "src/hzpch.cpp"
-
 	files
 	{
 		"src/**.h",
-		"src/**.cpp",
-		"vendor/stb_image/**.h",
-		"vendor/stb_image/**.cpp",
-		"vendor/glm/glm/**.hpp",
-		"vendor/glm/glm/**.inl"
+		"src/**.cpp"
 	}
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS",
 		"_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING"
 	}
 
 	includedirs
 	{
-		"src",
-		"vendor/Glad/include",
-		"vendor/GLFW/include",
-		"vendor/glm",
-		"vendor/imgui",
-		"vendor/spdlog/include",
-		"vendor/stb_image"
+	    "../Hazel/src",
+	    "../Hazel/vendor/glm",
+	    "../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
+	    "../Hazel/vendor/spdlog/include"
 	}
 
-	links 
-	{ 
-		"GLFW",
-		"Glad",
-		"ImGui",
-		"opengl32.lib"
+	links
+	{
+		"Hazel"
 	}
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"HZ_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
-
+		
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Profile"
-		files "../vendor/Tracy/TracyClient.cpp"
 		defines
 		{
 			"HZ_PROFILE",
@@ -73,7 +52,3 @@ project "Hazel"
 		defines "HZ_RELEASE"
 		runtime "Release"
 		optimize "on"
-
-	filter "files:**/TracyClient.cpp"
-		flags "NoPCH"
-	
