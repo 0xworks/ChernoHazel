@@ -20,10 +20,11 @@ project "Hazelnut"
 
 	includedirs
 	{
-	    "../Hazel/src",
-	    "../Hazel/vendor/glm",
-	    "../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
-	    "../Hazel/vendor/spdlog/include"
+		"../Hazel/src",
+		"../Hazel/vendor/glm",
+		"../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
+		"../Hazel/vendor/spdlog/include",
+		"../Hazel/vendor/entt/include"
 	}
 
 	links

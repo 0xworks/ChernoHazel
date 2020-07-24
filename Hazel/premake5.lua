@@ -23,7 +23,8 @@ project "Hazel"
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING"
+		"_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	includedirs
@@ -34,7 +35,8 @@ project "Hazel"
 		"vendor/glm",
 		"vendor/imgui",
 		"vendor/spdlog/include",
-		"vendor/stb_image"
+		"vendor/stb_image",
+		"vendor/entt/include"
 	}
 
 	links 
@@ -50,8 +52,6 @@ project "Hazel"
 
 		defines
 		{
-			"HZ_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
 		}
 
 	filter "configurations:Debug"
