@@ -60,6 +60,16 @@ namespace Hazel {
 		return entity;
 	}
 
+	void Scene::DestroyEntity(Entity entity)
+	{
+		m_Registry.destroy(entity.m_EntityHandle);
+	}
+
+	void Scene::DestroyAllEntities()
+	{
+		m_Registry.clear();
+	}
+
 	void Scene::OnUpdate(Timestep ts)
 	{
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);

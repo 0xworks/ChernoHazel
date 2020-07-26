@@ -1,13 +1,15 @@
 #pragma once
 
+#include "Hazel/Core/Log.h"
 #include "Scene.h"
-
 #include "entt.hpp"
 
 namespace Hazel {
 
 	class Entity
 	{
+		friend class Scene;
+
 	public:
 		Entity() = default;
 		Entity(entt::entity handle, Scene* scene);
@@ -41,8 +43,17 @@ namespace Hazel {
 		}
 
 		operator bool() const { return m_EntityHandle != entt::null; }
+
+		bool operator==(const Entity& other) const {
+			return (m_EntityHandle == other.m_EntityHandle) && (m_Scene == other.m_Scene);
+		}
+
+		bool operator!=(const Entity& other) const {
+			return !(*this == other);
+		}
+
 	private:
-		entt::entity m_EntityHandle{ 0 };
+		entt::entity m_EntityHandle = entt::null;
 		Scene* m_Scene = nullptr;
 	};
 
