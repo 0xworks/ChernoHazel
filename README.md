@@ -9,6 +9,7 @@ Notable features in the Freeman40 branch:
 - ~~Experimental ECS (not the one that Cherno is planning to use)~~
 - "modular" premake (to make it easier to use Hazel as a submodule of external project)
 - Profiling is done with the "Tracy Profiler" rather than the Hazel instrumentor
+- imgui.ini is not version controlled
 	
 
 This branch should not be used to create PRs for upstream TheCherno/Hazel.
