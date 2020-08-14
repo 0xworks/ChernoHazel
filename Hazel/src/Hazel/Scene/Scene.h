@@ -5,10 +5,10 @@
 
 namespace Hazel {
 
+	class Entity;
+
 	class Scene
 	{
-		friend class Entity;
-
 	public:
 		Scene();
 		~Scene();
@@ -20,12 +20,19 @@ namespace Hazel {
 		void DestroyAllEntities();
 
 		void OnUpdate(Timestep ts);
+		void OnViewportResize(uint32_t width, uint32_t height);
 
-	// HACK: At this stage (episode 79 of Game-Engine series), I am unsure
-	//       how Cherno plans to expose "groups" and "views" outside of Hazel
-	//       rather than try and guess, for now I am just exposing the registry directly
-	//private:
+	// HACK: At this stage (episode 82 of Game-Engine series), I am unsure
+	//       how (or if) Cherno plans to expose "groups" and "views" to clients
+	//       of the Hazel Engine.
+	//       Right now clients do need access (because the engine isnt finished yet),
+	//       I'm just going to hackaround this by exposing the registry directly
 		entt::registry m_Registry;
+
+	private:
+		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+
+		friend class Entity;
 	};
 
 }
