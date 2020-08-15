@@ -7,6 +7,8 @@ namespace Hazel {
 	class ScriptableEntity
 	{
 	public:
+		ScriptableEntity(Entity entity): m_Entity(entity) {}
+
 		template<typename T>
 		T& GetComponent()
 		{

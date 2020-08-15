@@ -54,7 +54,7 @@ namespace Hazel {
 	{
 		ScriptableEntity* Instance = nullptr;
 
-		std::function<void()> InstantiateFunction;
+		std::function<void(Entity)> InstantiateFunction;
 		std::function<void()> DestroyInstanceFunction;
 
 		std::function<void(ScriptableEntity*)> OnCreateFunction;
@@ -64,7 +64,11 @@ namespace Hazel {
 		template<typename T>
 		void Bind()
 		{
-			InstantiateFunction = [&]() { Instance = new T(); };
+			InstantiateFunction = [&](Entity entity) {
+				Instance = new T(entity);
+				if (OnCreateFunction)
+					OnCreateFunction(Instance);
+			};
 			DestroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
 
 			OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
