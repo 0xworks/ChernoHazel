@@ -4,6 +4,9 @@ project "Sandbox"
 	cppdialect "C++17"
 	staticruntime "on"
 
+	configuration "vs*"
+		buildoptions { "/permissive-" }
+
 	targetdir ("../bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
 
