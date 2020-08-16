@@ -42,7 +42,7 @@ namespace Hazel {
 			m_Scene->m_Registry.remove<T>(m_EntityHandle);
 		}
 
-		operator bool() const { return m_EntityHandle != entt::null; }
+		operator bool() const { return m_Scene && m_Scene->m_Registry.valid(m_EntityHandle); }
 
 		bool operator==(const Entity& other) const {
 			return (m_EntityHandle == other.m_EntityHandle) && (m_Scene == other.m_Scene);
