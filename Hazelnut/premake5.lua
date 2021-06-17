@@ -2,7 +2,7 @@ project "Hazelnut"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
 	configuration "vs*"
 		buildoptions { "/permissive-" }
@@ -27,7 +27,8 @@ project "Hazelnut"
 		"../Hazel/vendor/glm",
 		"../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
 		"../Hazel/vendor/spdlog/include",
-		"../Hazel/vendor/entt/include"
+		"../Hazel/vendor/entt/include",
+        "../Hazel/vendor/ImGuizmo/include"
 	}
 
 	links
@@ -52,7 +53,8 @@ project "Hazelnut"
 		runtime "Release"
 		optimize "on"
 
-	filter "configurations:Release"
-		defines "HZ_RELEASE"
+
+	filter "configurations:Dist"
+		defines "HZ_DIST"
 		runtime "Release"
 		optimize "on"

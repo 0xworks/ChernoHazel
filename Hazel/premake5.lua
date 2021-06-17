@@ -2,7 +2,7 @@ project "Hazel"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
 	configuration "vs*"
 		buildoptions { "/permissive-" }
@@ -20,7 +20,9 @@ project "Hazel"
 		"vendor/stb_image/**.h",
 		"vendor/stb_image/**.cpp",
 		"vendor/glm/glm/**.hpp",
-		"vendor/glm/glm/**.inl"
+		"vendor/glm/glm/**.inl",
+        "vendor/ImGuizmo/ImGuizmo.h",
+        "vendor/ImGuizmo/ImGuizmo.cpp"
 	}
 
 	defines
@@ -39,7 +41,10 @@ project "Hazel"
 		"vendor/imgui",
 		"vendor/spdlog/include",
 		"vendor/stb_image",
-		"vendor/entt/include"
+		"vendor/entt/include",
+        "vendor/yamp-cpp/include",
+        "vendor/ImGuizmo/include",
+        "vulkanSDK goes here"
 	}
 
 	links 
@@ -47,8 +52,15 @@ project "Hazel"
 		"GLFW",
 		"Glad",
 		"ImGui",
+        "yaml-cpp",
 		"opengl32.lib"
 	}
+
+    filter "files:vendor/ImGuizmo/**.cpp"
+    flags { "NoPCH" }
+
+	filter "files:**/TracyClient.cpp"
+		flags "NoPCH"
 
 	filter "system:windows"
 		systemversion "latest"
@@ -61,6 +73,13 @@ project "Hazel"
 		defines "HZ_DEBUG"
 		runtime "Debug"
 		symbols "on"
+
+		links
+		{
+			"%{Library.ShaderC_Debug}",
+			"%{Library.SPIRV_Cross_Debug}",
+			"%{Library.SPIRV_Cross_GLSL_Debug}"
+		}
 
 	filter "configurations:Profile"
 		files "../vendor/Tracy/TracyClient.cpp"
@@ -77,6 +96,21 @@ project "Hazel"
 		runtime "Release"
 		optimize "on"
 
-	filter "files:**/TracyClient.cpp"
-		flags "NoPCH"
+		links
+		{
+			"%{Library.ShaderC_Release}",
+			"%{Library.SPIRV_Cross_Release}",
+			"%{Library.SPIRV_Cross_GLSL_Release}"
+		}
 	
+	filter "configurations:Dist"
+		defines "HZ_DIST"
+		runtime "Release"
+		optimize "on"
+
+		links
+		{
+			"%{Library.ShaderC_Release}",
+			"%{Library.SPIRV_Cross_Release}",
+			"%{Library.SPIRV_Cross_GLSL_Release}"
+		}

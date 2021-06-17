@@ -1,6 +1,6 @@
 # Binaries
 **/bin/
-!vendor/bin/premake/
+!vendor/premake/bin/
 bin-int/
 
 # Hazel files
@@ -13,3 +13,8 @@ imgui.ini
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+
+# Directories
+Hazel/vendor/VulkanSDK
+Hazelnut/assets/cache
+scripts/__pycache__

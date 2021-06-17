@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hzpch.h"
+#include <sstream>
 
 #include "Hazel/Core/Base.h"
 #include "Hazel/Events/Event.h"
@@ -9,13 +9,16 @@ namespace Hazel {
 
 	struct WindowProps
 	{
-		std::string Title = "Hazel Engine";
-		unsigned int InitialWidth = 1280;
-		unsigned int InitialHeight = 720;
-		unsigned int MinWidth = 0;
-		unsigned int MinHeight = 0;
-		unsigned int MaxWidth = 0;
-		unsigned int MaxHeight = 0;
+		std::string Title;
+		uint32_t Width;
+		uint32_t Height;
+
+		WindowProps(const std::string& title = "Hazel Engine",
+			        uint32_t width = 1600,
+			        uint32_t height = 900)
+			: Title(title), Width(width), Height(height)
+		{
+		}
 	};
 
 	// Interface representing a desktop system based Window
