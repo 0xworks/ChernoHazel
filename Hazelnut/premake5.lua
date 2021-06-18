@@ -46,6 +46,9 @@ project "Hazelnut"
 		defines "HZ_DEBUG"
 		runtime "Debug"
 		symbols "on"
+        postbuildcommands {
+           "{COPY} ../Hazel/vendor/VulkanSDK/bin/ %{cfg.targetdir}"
+        }
 
 	filter "configurations:Profile"
 		defines
@@ -61,3 +64,4 @@ project "Hazelnut"
 		defines "HZ_DIST"
 		runtime "Release"
 		optimize "on"
+
