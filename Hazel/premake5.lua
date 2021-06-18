@@ -1,3 +1,5 @@
+include "../Dependencies.lua"
+
 project "Hazel"
 	kind "StaticLib"
 	language "C++"
@@ -35,17 +37,18 @@ project "Hazel"
 	includedirs
 	{
 		"src",
-		"vendor/Glad/include",
-		"vendor/GLFW/include",
-		"vendor/glm",
-		"vendor/imgui",
-		"vendor/spdlog/include",
-		"vendor/stb_image",
-		"vendor/entt/include",
-        "vendor/yamp-cpp/include",
-        "vendor/ImGuizmo/include",
-        "vulkanSDK goes here"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.VulkanSDK}",
+		"%{IncludeDir.yaml_cpp}"
 	}
+
 
 	links 
 	{ 
