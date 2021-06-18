@@ -6,8 +6,7 @@ Notable features in the Freeman40 branch:
   - sub textures stuff from yt episodes 67-70 (that Cherno is not planning to commit any time soon)
   - bug fix for texture bleeding at edges
   - sub textures can be flipped in one or both axes by setting size to negative values
-- ~~Experimental ECS (not the one that Cherno is planning to use)~~
-- "modular" premake (to make it easier to use Hazel as a submodule of external project)
+- Updates to premake files (to make it easier to use Hazel as a submodule of external project)
 - Profiling is done with the "Tracy Profiler" rather than the Hazel instrumentor
 - imgui.ini is not version controlled
 	
