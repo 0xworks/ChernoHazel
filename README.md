@@ -1,14 +1,19 @@
 ## Freeman40  branch ##
 This is the "Freeman40" branch of my fork of TheCherno/Hazel.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
 
-Notable features in the Freeman40 branch:
-- Spritesheets
-  - sub textures stuff from yt episodes 67-70 (that Cherno is not planning to commit any time soon)
-  - bug fix for texture bleeding at edges
-  - sub textures can be flipped in one or both axes by setting size to negative values
-- Updates to premake files (to make it easier to use Hazel as a submodule of external project)
+Notable changes betwee this Freeman40 branch and the original TheCherno/Hazel are:
+- Spritesheets:
+  - sub-textures stuff from yt episodes 67-70 (that Cherno is not planning to commit any time soon)
+  - bug fix for texture bleeding at edges of sub-textures
+  - sub-textures can be flipped in one or both axes by setting size to negative values
+- HACK: Scene EnTT registry is exposed to clients to faciliate iteration over view etc.  (temporary until Hazel provides mechanism for this)
+- Updates to premake files:
+  - make it easier to use Hazel as a submodule of an external project
+  - turn off MSVC permissive mode (to catch C++ compliance issues that may cause problems for other compilers)
+  - turn on MSVC synchronous PDB writes (allows for better build parallelism)
+  - post build steps to copy debug VulkanSDK libs to executable bin folders
 - Profiling is done with the "Tracy Profiler" rather than the Hazel instrumentor
-- imgui.ini is not version controlled
+- imgui.ini removed from version control
 	
 
 This branch should not be used to create PRs for upstream TheCherno/Hazel.
