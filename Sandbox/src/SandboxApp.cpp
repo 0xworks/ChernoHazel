@@ -7,7 +7,7 @@
 class Sandbox : public Hazel::Application
 {
 public:
-	Sandbox()
+	Sandbox(Hazel::ApplicationCommandLineArgs args)
 	{
 		// PushLayer(new ExampleLayer());
 		PushLayer(new Sandbox2D());
@@ -16,7 +16,7 @@ public:
 	~Sandbox() = default;
 };
 
-Hazel::Application* Hazel::CreateApplication()
+Hazel::Application* Hazel::CreateApplication(Hazel::ApplicationCommandLineArgs args)
 {
-	return new Sandbox();
+	return new Sandbox(args);
 }

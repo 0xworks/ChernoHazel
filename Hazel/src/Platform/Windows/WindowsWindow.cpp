@@ -39,10 +39,10 @@ namespace Hazel {
 		HZ_PROFILE_FUNCTION();
 
 		m_Data.Title = props.Title;
-		m_Data.Width = props.InitialWidth;
-		m_Data.Height = props.InitialHeight;
+		m_Data.Width = props.Width;
+		m_Data.Height = props.Height;
 
-		HZ_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.InitialWidth, props.InitialHeight);
+		HZ_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (s_GLFWWindowCount == 0)
 		{
@@ -58,14 +58,7 @@ namespace Hazel {
 			if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
 				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 		#endif
-			m_Window = glfwCreateWindow((int)props.InitialWidth, (int)props.InitialHeight, m_Data.Title.c_str(), nullptr, nullptr);
-			glfwSetWindowSizeLimits(
-				m_Window,
-				props.MinWidth ? (int)props.MinWidth : GLFW_DONT_CARE,
-				props.MinHeight ? (int)props.MinHeight : GLFW_DONT_CARE,
-				props.MaxWidth ? (int)props.MaxWidth : GLFW_DONT_CARE,
-				props.MaxHeight ? (int)props.MaxHeight : GLFW_DONT_CARE
-			);
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 			++s_GLFWWindowCount;
 		}
 

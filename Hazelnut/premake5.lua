@@ -1,3 +1,5 @@
+include "../Dependencies.lua"
+
 project "Hazelnut"
 	kind "ConsoleApp"
 	language "C++"
@@ -23,13 +25,14 @@ project "Hazelnut"
 
 	includedirs
 	{
-		"../Hazel/src",
-		"../Hazel/vendor/glm",
-		"../Hazel/vendor",                      -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
-		"../Hazel/vendor/spdlog/include",
-		"../Hazel/vendor/entt/include",
-        "../Hazel/vendor/ImGuizmo/include"
+		"%{wks.location}/Hazel/src",
+		"%{wks.location}/Hazel/vendor",   -- this one is actually for imgui (hazel code goes #include imgui/imgui.h)
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.spdlog}"
 	}
+
 
 	links
 	{
