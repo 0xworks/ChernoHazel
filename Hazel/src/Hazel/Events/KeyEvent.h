@@ -3,6 +3,8 @@
 #include "Hazel/Events/Event.h"
 #include "Hazel/Core/KeyCodes.h"
 
+#include <sstream>
+
 namespace Hazel {
 
 	class KeyEvent : public Event

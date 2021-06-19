@@ -8,6 +8,7 @@
 namespace Hazel {
 
 	class Entity;
+	struct CameraComponent;
 
 	class Scene
 	{
@@ -33,8 +34,13 @@ namespace Hazel {
 		entt::registry m_Registry;
 
 	private:
+
 		template<typename T>
-		void OnComponentAdded(Entity entity, T& component);
+		void OnComponentAdded(Entity entity, T& component) {}
+
+		template<>
+		void OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component);
+
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
 		friend class Entity;
