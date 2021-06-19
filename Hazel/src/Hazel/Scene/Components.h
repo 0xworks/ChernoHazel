@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SceneCamera.h"
-#include "ScriptableEntity.h"
+#include "NativeScript.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -10,6 +10,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <functional>
+#include <memory>
 
 namespace Hazel {
 
@@ -66,16 +67,13 @@ namespace Hazel {
 
 	struct NativeScriptComponent
 	{
-		ScriptableEntity* Instance = nullptr;
-
-		std::function<ScriptableEntity*(void)> InstantiateScript;
-		std::function<void(NativeScriptComponent*)> DestroyScript;
+		std::function<std::unique_ptr<NativeScript>(Entity entity)> InstantiateScript;
+		std::unique_ptr<NativeScript> Instance;
 
 		template<typename T, typename... Args>
 		void Bind(Args... args)
 		{
-			InstantiateScript = [args...]() { return static_cast<ScriptableEntity*>(new T(args...)); };
-			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+			InstantiateScript = [args...](Entity entity) -> std::unique_ptr<NativeScript> { return std::make_unique<T>(entity, args...); };
 		}
 	};
 
