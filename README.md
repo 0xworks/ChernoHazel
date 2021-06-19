@@ -1,12 +1,16 @@
 ## Freeman40  branch ##
 This is the "Freeman40" branch of my fork of TheCherno/Hazel.  It contains experimental code, some changes to make Hazel easier to use in other projects, small bug fixes and other random hacks.  Other Hazel projects of mine will generally use this branch.
 
-Notable changes betwee this Freeman40 branch and the original TheCherno/Hazel are:
+Notable changes between this Freeman40 branch and the master branch (tracking origin TheCherno/Hazel:master) are:
+- Premake5 is updated to alpha16 (needed for C++20 support)
+- Uses C++20 (needed to take advantage of newest EnTT features)
 - Spritesheets:
   - sub-textures stuff from yt episodes 67-70 (that Cherno is not planning to commit any time soon)
   - bug fix for texture bleeding at edges of sub-textures
   - sub-textures can be flipped in one or both axes by setting size to negative values
-- HACK: Scene EnTT registry is exposed to clients to faciliate iteration over view etc.  (temporary until Hazel provides mechanism for this)
+- EnTT
+  - EnTT is added as a submodule, and updated to 0b3e3fd (which is latest as at today, 19June2021)
+  - HACK: Scene EnTT registry is exposed to clients to faciliate iteration over view etc.  (temporary until Hazel provides mechanism for this)
 - Updates to premake files:
   - make it easier to use Hazel as a submodule of an external project
   - turn off MSVC permissive mode (to catch C++ compliance issues that may cause problems for other compilers)
