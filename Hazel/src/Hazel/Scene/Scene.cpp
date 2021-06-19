@@ -58,11 +58,8 @@ namespace Hazel {
 		Camera* mainCamera = nullptr;
 		glm::mat4 cameraTransform;
 		{
-			auto view = m_Registry.view<TransformComponent, CameraComponent>();
-			for (auto entity : view)
+			for (auto&& [entity, transform, camera] : m_Registry.view<TransformComponent, CameraComponent>().each())
 			{
-				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
-				
 				if (camera.Primary)
 				{
 					mainCamera = &camera.Camera;
@@ -76,12 +73,10 @@ namespace Hazel {
 		{
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			for (auto entity : group)
+			// note: use of .group<> here precludes sorting entities on TransformComponent.  Might need to change back to .view<> later.
+			for (auto&& [entity, transform, sprite] : m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>).each())
 			{
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-
-				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+				Renderer2D::DrawSprite(transform.GetTransform(), sprite, static_cast<int>(entity));
 			}
 
 			Renderer2D::EndScene();
@@ -93,12 +88,10 @@ namespace Hazel {
 	{
 		Renderer2D::BeginScene(camera);
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-		for (auto entity : group)
+		// note: use of .group<> here precludes sorting entities on TransformComponent.  Might need to change back to .view<> later.
+		for (auto&& [entity, transform, sprite] : m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>).each())
 		{
-			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-
-			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+			Renderer2D::DrawSprite(transform.GetTransform(), sprite, static_cast<int>(entity));
 		}
 
 		Renderer2D::EndScene();
@@ -110,31 +103,30 @@ namespace Hazel {
 		m_ViewportHeight = height;
 
 		// Resize our non-FixedAspectRatio cameras
-		auto view = m_Registry.view<CameraComponent>();
-		for (auto entity : view)
+		for (auto&& [entity, camera] : m_Registry.view<CameraComponent>().each())
 		{
-			auto& cameraComponent = view.get<CameraComponent>(entity);
-			if (!cameraComponent.FixedAspectRatio)
-				cameraComponent.Camera.SetViewportSize(width, height);
+			if (!camera.FixedAspectRatio)
+			{
+				camera.Camera.SetViewportSize(width, height);
+			}
 		}
-
 	}
 
 	Entity Scene::GetPrimaryCameraEntity()
 	{
-		auto view = m_Registry.view<CameraComponent>();
-		for (auto entity : view)
+		for (auto&& [entity, camera] : m_Registry.view<CameraComponent>().each())
 		{
-			const auto& camera = view.get<CameraComponent>(entity);
 			if (camera.Primary)
+			{
 				return Entity{entity, this};
+			}
 		}
 		return {};
 	}
 
 
 	template<>
-	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent & component)
+	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
 	{
 		if (m_ViewportWidth > 0 && m_ViewportHeight > 0)
 		{
