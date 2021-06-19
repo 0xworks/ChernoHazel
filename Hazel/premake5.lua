@@ -3,7 +3,7 @@ include "../Dependencies.lua"
 project "Hazel"
 	kind "StaticLib"
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++20"
 	staticruntime "off"
 
 	configuration "vs*"

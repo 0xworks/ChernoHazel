@@ -9,7 +9,7 @@ ROOT = get_directory_name(debug.getinfo(1,'S').source)
 VULKAN_SDK = os.getenv("VULKAN_SDK")
 
 IncludeDir = {}
-IncludeDir["entt"]        = "%{ROOT}Hazel/vendor/entt/include"
+IncludeDir["entt"]        = "%{ROOT}Hazel/vendor/entt/src/entt"
 IncludeDir["Glad"]        = "%{ROOT}Hazel/vendor/Glad/include"
 IncludeDir["GLFW"]        = "%{ROOT}Hazel/vendor/GLFW/include"
 IncludeDir["glm"]         = "%{ROOT}Hazel/vendor/glm"

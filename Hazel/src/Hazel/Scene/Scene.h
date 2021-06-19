@@ -3,7 +3,7 @@
 #include "Hazel/Core/Timestep.h"
 #include "Hazel/Renderer/EditorCamera.h"
 
-#include "entt.hpp"
+#include <entt.hpp>
 
 namespace Hazel {
 

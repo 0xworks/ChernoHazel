@@ -42,7 +42,7 @@ namespace Hazel {
 	{
 		// Update scripts
 		{
-			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+			for(auto&&[entity, nsc] : m_Registry.view<NativeScriptComponent>().each())
 			{
 				// TODO: Move to Scene::OnScenePlay
 				if (!nsc.Instance)
@@ -53,7 +53,7 @@ namespace Hazel {
 				}
 
 				nsc.Instance->OnUpdate(ts);
-			});
+			}
 		}
 
 		// Render 2D

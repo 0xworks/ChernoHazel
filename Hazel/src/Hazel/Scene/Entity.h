@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Hazel/Core/Log.h"
 #include "Scene.h"
-#include "entt.hpp"
+#include "Hazel/Core/Log.h"
+
+#include <entt.hpp>
 
 namespace Hazel {
 
@@ -34,7 +35,7 @@ namespace Hazel {
 		template<typename T>
 		bool HasComponent()
 		{
-			return m_Scene->m_Registry.has<T>(m_EntityHandle);
+			return m_Scene->m_Registry.all_of<T>(m_EntityHandle);
 		}
 
 		template<typename T>
