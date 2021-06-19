@@ -23,3 +23,6 @@
 [submodule "vendor/Tracy"]
 	path = vendor/Tracy
 	url = https://github.com/wolfpld/tracy.git
+[submodule "Hazel/vendor/entt"]
+	path = Hazel/vendor/entt
+	url = https://github.com/skypjack/entt.git
