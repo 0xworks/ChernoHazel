@@ -1,13 +1,15 @@
 #pragma once
 
+#include "SceneCamera.h"
+#include "ScriptableEntity.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "SceneCamera.h"
-#include "ScriptableEntity.h"
+#include <functional>
 
 namespace Hazel {
 
@@ -66,13 +68,13 @@ namespace Hazel {
 	{
 		ScriptableEntity* Instance = nullptr;
 
-		ScriptableEntity*(*InstantiateScript)();
-		void (*DestroyScript)(NativeScriptComponent*);
+		std::function<ScriptableEntity*(void)> InstantiateScript;
+		std::function<void(NativeScriptComponent*)> DestroyScript;
 
-		template<typename T>
-		void Bind()
+		template<typename T, typename... Args>
+		void Bind(Args... args)
 		{
-			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			InstantiateScript = [args...]() { return static_cast<ScriptableEntity*>(new T(args...)); };
 			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 	};
