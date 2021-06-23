@@ -10,6 +10,9 @@ namespace Hazel {
 	class Input
 	{
 	public:
+		static void Enable(bool enabled);
+		static bool IsEnabled();
+
 		static bool IsKeyPressed(KeyCode key);
 
 		static bool IsMouseButtonPressed(MouseCode button);

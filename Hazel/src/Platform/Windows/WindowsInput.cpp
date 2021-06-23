@@ -6,18 +6,38 @@
 
 namespace Hazel {
 
+	static bool s_InputEnabled = true;
+
+	void Input::Enable(bool enabled)
+	{
+		s_InputEnabled = enabled;
+	}
+
+	bool Input::IsEnabled() 
+	{
+		return s_InputEnabled;
+	}
+
 	bool Input::IsKeyPressed(const KeyCode key)
 	{
-		auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetKey(window, static_cast<int32_t>(key));
-		return state == GLFW_PRESS || state == GLFW_REPEAT;
+		if (s_InputEnabled)
+		{
+			auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto state = glfwGetKey(window, static_cast<int32_t>(key));
+			return state == GLFW_PRESS || state == GLFW_REPEAT;
+		}
+		return false;
 	}
 
 	bool Input::IsMouseButtonPressed(const MouseCode button)
 	{
-		auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetMouseButton(window, static_cast<int32_t>(button));
-		return state == GLFW_PRESS;
+		if (s_InputEnabled)
+		{
+			auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+			auto state = glfwGetMouseButton(window, static_cast<int32_t>(button));
+			return state == GLFW_PRESS;
+		}
+		return false;
 	}
 
 	glm::vec2 Input::GetMousePosition()
