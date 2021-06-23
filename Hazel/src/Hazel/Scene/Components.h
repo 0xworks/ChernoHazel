@@ -11,6 +11,7 @@
 
 #include <functional>
 #include <memory>
+#include <unordered_map>
 
 namespace Hazel {
 
@@ -67,14 +68,39 @@ namespace Hazel {
 
 	struct NativeScriptComponent
 	{
-		std::function<std::unique_ptr<NativeScript>(Entity entity)> InstantiateScript;
-		std::unique_ptr<NativeScript> Instance;
+		std::unordered_map<entt::id_type, std::function<std::unique_ptr<NativeScript>(Entity entity)>> InstantiateScripts;
+		std::unordered_map<entt::id_type, std::unique_ptr<NativeScript>> Instances;
 
 		template<typename T, typename... Args>
-		void Bind(Args... args)
+		NativeScriptComponent& Bind(Args... args)
 		{
-			InstantiateScript = [args...](Entity entity) -> std::unique_ptr<NativeScript> { return std::make_unique<T>(entity, args...); };
+			InstantiateScripts.try_emplace(entt::type_id<T>().seq(), [args...](Entity entity) -> std::unique_ptr<NativeScript> { return std::make_unique<T>(entity, args...); });
+			return *this;
 		}
+
+		NativeScriptComponent& Instantiate(Entity entity)
+		{
+			// note: no guarantee on order that the scripts are instantiated
+			for (const auto& [id, instantiateScript] : InstantiateScripts) {
+				Instances.try_emplace(id, instantiateScript(entity));
+			}
+			return *this;
+		}
+
+		template<typename T>
+		T* GetInstance()
+		{
+			return Instances.at[entt::type_hash<T>];
+		}
+
+		void OnUpdate(Timestep ts)
+		{
+			// note: no guarantee on order that the instances are updated
+			for (auto& [id, instance] : Instances) {
+				instance->OnUpdate(ts);
+			}
+		}
+
 	};
 
 }

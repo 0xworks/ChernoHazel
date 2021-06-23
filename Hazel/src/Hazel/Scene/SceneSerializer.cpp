@@ -160,7 +160,7 @@ namespace Hazel {
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
 		m_Scene->m_Registry.each([&](auto entityID)
 		{
-			Entity entity = { entityID, m_Scene.get() };
+			Entity entity = { entityID, *m_Scene };
 			if (!entity)
 				return;
 
@@ -217,7 +217,9 @@ namespace Hazel {
 				auto cameraComponent = entity["CameraComponent"];
 				if (cameraComponent)
 				{
-					auto& cc = deserializedEntity.AddComponent<CameraComponent>();
+					auto& cc = deserializedEntity.AddComponent<CameraComponent>()
+						.GetComponent<CameraComponent>()
+					;
 
 					auto cameraProps = cameraComponent["Camera"];
 					cc.Camera.SetProjectionType((SceneCamera::ProjectionType)cameraProps["ProjectionType"].as<int>());
@@ -237,8 +239,10 @@ namespace Hazel {
 				auto spriteRendererComponent = entity["SpriteRendererComponent"];
 				if (spriteRendererComponent)
 				{
-					auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
-					src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
+					deserializedEntity.AddComponent<SpriteRendererComponent>()
+						.GetComponent<SpriteRendererComponent>()
+						.Color = spriteRendererComponent["Color"].as<glm::vec4>()
+					;
 				}
 			}
 		}

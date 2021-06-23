@@ -18,12 +18,14 @@ namespace Hazel {
 	{
 	}
 
-	Entity Scene::CreateEntity(const std::string& name)
+	Entity Scene::CreateEntity(const std::string_view name)
 	{
-		Entity entity = { m_Registry.create(), this };
-		entity.AddComponent<TransformComponent>();
-		auto& tag = entity.AddComponent<TagComponent>();
-		tag.Tag = name.empty() ? "Entity" : name;
+		Entity entity = { m_Registry.create(), *this };
+		entity.AddComponent<TransformComponent>()
+			.AddComponent<TagComponent>()
+			.GetComponent<TagComponent>()
+			.Tag = name.empty() ? "Entity" : name
+		;
 		return entity;
 	}
 
@@ -45,12 +47,11 @@ namespace Hazel {
 			for(auto&&[entity, nsc] : m_Registry.view<NativeScriptComponent>().each())
 			{
 				// TODO: Move to Scene::OnScenePlay
-				if (!nsc.Instance)
+				if (nsc.Instances.empty())
 				{
-					nsc.Instance = nsc.InstantiateScript({entity, this});
+					nsc.Instantiate({entity, *this});
 				}
-
-				nsc.Instance->OnUpdate(ts);
+				nsc.OnUpdate(ts);
 			}
 		}
 
@@ -118,7 +119,7 @@ namespace Hazel {
 		{
 			if (camera.Primary)
 			{
-				return Entity{entity, this};
+				return Entity{entity, *this};
 			}
 		}
 		return {};

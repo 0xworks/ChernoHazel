@@ -5,6 +5,8 @@
 
 #include <entt.hpp>
 
+#include <string_view>
+
 namespace Hazel {
 
 	class Entity;
@@ -16,7 +18,7 @@ namespace Hazel {
 		Scene();
 		~Scene();
 
-		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntity(const std::string_view name = {});
 		void DestroyEntity(Entity entity);
 		void DestroyAllEntities();
 
