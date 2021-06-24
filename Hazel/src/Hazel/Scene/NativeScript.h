@@ -18,6 +18,12 @@ namespace Hazel {
 		}
 
 		template<typename T>
+		bool HasComponent() const
+		{
+			return m_Entity.HasComponent<T>();
+		}
+
+		template<typename T>
 		T& GetComponent()
 		{
 			return m_Entity.GetComponent<T>();

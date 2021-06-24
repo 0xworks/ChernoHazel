@@ -38,16 +38,24 @@ namespace Hazel {
 		}
 
 		template<typename T>
-		bool HasComponent()
+		const T& GetComponent() const
+		{
+			HZ_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
+			return m_Scene->m_Registry.get<T>(m_EntityHandle);
+		}
+
+		template<typename T>
+		bool HasComponent() const
 		{
 			return m_Scene->m_Registry.all_of<T>(m_EntityHandle);
 		}
 
 		template<typename T>
-		void RemoveComponent()
+		Entity& RemoveComponent()
 		{
 			HZ_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 			m_Scene->m_Registry.remove<T>(m_EntityHandle);
+			return *this;
 		}
 
 		Entity CreateEntity(const std::string_view name = {})
